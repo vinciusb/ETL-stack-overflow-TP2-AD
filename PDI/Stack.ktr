@@ -440,10 +440,10 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>StackOverflow</database>
+    <database>stackoverflow</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7a486ad39ff228ec4ff8b</password>
+    <password>Encrypted 2be98afc86aa7f2e4e554e33d8ec0fb8c</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -490,7 +490,7 @@
     <hop>
       <from>Add sequence</from>
       <to>Table output</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>StackOverflow 2021</from>
@@ -609,176 +609,6 @@
     </remotesteps>
     <GUI>
       <xloc>240</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Cria agregado 2</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var max = Math.pow(2,9)
-
-var valor = 0;
-
-function getBit(number, bitPosition) {
-  return (number &amp; (1 &lt;&lt; bitPosition)) === 0 ? true : false;
-}
-
-var video = getBit(valuename,0);
-var panic = getBit(valuename,1);
-var game = getBit(valuename,2);
-var meditate = getBit(valuename,3);
-var coworker = getBit(valuename,4);
-var stack_overflow = getBit(valuename,5);
-var work = getBit(valuename,6);
-var walk = getBit(valuename,7);
-var google = getBit(valuename,8);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>video</name>
-        <rename>video</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>panic</name>
-        <rename>panic</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>game</name>
-        <rename>game</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>meditate</name>
-        <rename>meditate</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>coworker</name>
-        <rename>coworker</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>stack_overflow</name>
-        <rename>stack_overflow</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>work</name>
-        <rename>work</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>walk</name>
-        <rename>walk</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>google</name>
-        <rename>google</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Generate rows 2</name>
-    <type>RowGenerator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>a</name>
-        <type>Boolean</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <limit>512</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms>5000</interval_in_ms>
-    <row_time_field>now</row_time_field>
-    <last_time_field>FiveSecondsAgo</last_time_field>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>128</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -960,6 +790,176 @@ Alert("index of 'o', search from position 7 : " + str3);
     </GUI>
   </step>
   <step>
+    <name>Cria agregado 2</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var max = Math.pow(2,9)
+
+var valor = 0;
+
+function getBit(number, bitPosition) {
+  return (number &amp; (1 &lt;&lt; bitPosition)) === 0 ? true : false;
+}
+
+var video = getBit(valuename,0);
+var panic = getBit(valuename,1);
+var game = getBit(valuename,2);
+var meditate = getBit(valuename,3);
+var coworker = getBit(valuename,4);
+var stack_overflow = getBit(valuename,5);
+var work = getBit(valuename,6);
+var walk = getBit(valuename,7);
+var google = getBit(valuename,8);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>video</name>
+        <rename>video</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>panic</name>
+        <rename>panic</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>game</name>
+        <rename>game</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>meditate</name>
+        <rename>meditate</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>coworker</name>
+        <rename>coworker</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>stack_overflow</name>
+        <rename>stack_overflow</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>work</name>
+        <rename>work</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>walk</name>
+        <rename>walk</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>google</name>
+        <rename>google</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Generate rows 2</name>
+    <type>RowGenerator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>a</name>
+        <type>Boolean</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <limit>512</limit>
+    <never_ending>N</never_ending>
+    <interval_in_ms>5000</interval_in_ms>
+    <row_time_field>now</row_time_field>
+    <last_time_field>FiveSecondsAgo</last_time_field>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>128</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Remove NA</name>
     <type>ReplaceString</type>
     <description/>
@@ -1053,6 +1053,52 @@ Alert("index of 'o', search from position 7 : " + str3);
     <GUI>
       <xloc>448</xloc>
       <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Remove var inuteis 2 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>SOVisitFreq</name>
+      </field>
+      <field>
+        <name>SOAccount</name>
+      </field>
+      <field>
+        <name>SOPartFreq</name>
+      </field>
+      <field>
+        <name>SOComm</name>
+      </field>
+      <field>
+        <name>NEWOtherComms</name>
+      </field>
+      <field>
+        <name>stuck_key</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1871,58 +1917,6 @@ Alert("index of 'o', search from position 7 : " + str3);
     <GUI>
       <xloc>560</xloc>
       <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Remove var inuteis 2 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>SOVisitFreq</name>
-        <rename/>
-      </field>
-      <field>
-        <name>SOAccount</name>
-        <rename/>
-      </field>
-      <field>
-        <name>SOPartFreq</name>
-        <rename/>
-      </field>
-      <field>
-        <name>SOComm</name>
-        <rename/>
-      </field>
-      <field>
-        <name>NEWOtherComms</name>
-        <rename/>
-      </field>
-      <field>
-        <name>stuck_key</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>640</xloc>
-      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

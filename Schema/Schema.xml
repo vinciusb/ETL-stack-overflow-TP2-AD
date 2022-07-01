@@ -1,0 +1,394 @@
+<Schema name="Schema">
+  <Cube name="MultiHierarchy" visible="true" cache="true" enabled="true">
+    <Table name="fato_uso_stack_overflow">
+    </Table>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_pessoa" highCardinality="false" name="DIM_PESSOA">
+      <Hierarchy name="COUNTRY" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="country" visible="true" table="pessoa" column="country" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="US_STATE" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="us_state" visible="true" table="pessoa" column="us_state" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="UK_COUNTRY" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="uk_country" visible="true" table="pessoa" column="uk_country" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="EDLEVEL" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="edlevel" visible="true" table="pessoa" column="edlevel" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="AGE" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="age" visible="true" table="pessoa" column="age" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="GENDER" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="gender" visible="true" table="pessoa" column="gender" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="TRANS" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="trans" visible="true" table="pessoa" column="trans" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="SEXUALITY" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="sexuality" visible="true" table="pessoa" column="sexuality" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="ETHNICITY" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="ethnicity" visible="true" table="pessoa" column="ethnicity" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="ACCESSIBILITY" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="accessibility" visible="true" table="pessoa" column="accessibility" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="MENTALHEALTH" visible="true" hasAll="true" primaryKey="id_pessoa">
+        <Table name="pessoa">
+        </Table>
+        <Level name="mentalhealth" visible="true" table="pessoa" column="mentalhealth" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_programador" highCardinality="false" name="DIM_PROGRAMADOR">
+      <Hierarchy name="AGE1CODE" visible="true" hasAll="true" primaryKey="id_programador">
+        <Table name="programador">
+        </Table>
+        <Level name="age1code" visible="true" table="programador" column="age1stcode" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="LEARNCODE" visible="true" hasAll="true" primaryKey="id_programador">
+        <Table name="programador">
+        </Table>
+        <Level name="learncode" visible="true" table="programador" column="learncode" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="YEARSCODE" visible="true" hasAll="true" primaryKey="id_programador">
+        <Table name="programador">
+        </Table>
+        <Level name="yearscode" visible="true" table="programador" column="yearscode" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="YEARSCODEPRO" visible="true" hasAll="true" primaryKey="id_programador">
+        <Table name="programador">
+        </Table>
+        <Level name="yearscodepro" visible="true" table="programador" column="yearscodepro" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="DEVTYPE" visible="true" hasAll="true" primaryKey="id_programador">
+        <Table name="programador">
+        </Table>
+        <Level name="devtype" visible="true" table="programador" column="devtype" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="OPSYS" visible="true" hasAll="true" primaryKey="id_programador">
+        <Table name="programador">
+        </Table>
+        <Level name="opsys" visible="true" table="programador" column="opsys" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="SQL" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador">
+          </Table>
+          <Table name="languages" alias="">
+          </Table>
+        </Join>
+        <Level name="sql" visible="true" table="languages" column="_sql" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="BASH" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="bash" visible="true" table="languages" column="bash" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="C" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="c" visible="true" table="languages" column="c" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="CPP" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightKey="id_languages">
+          <Table name="programador" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="cpp" visible="true" table="languages" column="cpp" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="CS" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="cs" visible="true" table="languages" column="cs" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="HTML_CSS" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="html_css" visible="true" table="languages" column="html_css" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="JAVA" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="java" visible="true" table="languages" column="java" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="JS" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="js" visible="true" table="languages" column="js" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="NODE_JS" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="node_js" visible="true" table="languages" column="node_js" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="PHP" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="php" visible="true" table="languages" column="php" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="PYTHON" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" alias="">
+          </Table>
+          <Table name="languages" alias="">
+          </Table>
+        </Join>
+        <Level name="python" visible="true" table="languages" column="python" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="TYPE_SCRIPT" visible="true" hasAll="true" primaryKey="id_programador" primaryKeyTable="programador">
+        <Join leftKey="id_languages" rightAlias="" rightKey="id_languages">
+          <Table name="programador" schema="" alias="">
+          </Table>
+          <Table name="languages" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="type_script" visible="true" table="languages" column="type_scipt" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_trabalho" highCardinality="false" name="DIM_TRABALHO">
+      <Hierarchy name="MAINBRANCH" visible="true" hasAll="true" primaryKey="id_trabalho">
+        <Table name="trabalho">
+        </Table>
+        <Level name="mainbranch" visible="true" table="trabalho" column="mainbranch" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="EMPLOYMENT" visible="true" hasAll="true" primaryKey="id_trabalho">
+        <Table name="trabalho">
+        </Table>
+        <Level name="employment" visible="true" table="trabalho" column="employment" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="ORGSIZE" visible="true" hasAll="true" primaryKey="id_trabalho">
+        <Table name="trabalho">
+        </Table>
+        <Level name="orgsize" visible="true" table="trabalho" column="orgsize" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="CURRENCY" visible="true" hasAll="true" primaryKey="id_trabalho">
+        <Table name="trabalho">
+        </Table>
+        <Level name="currency" visible="true" table="trabalho" column="currency" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="COMPTOTAL" visible="true" hasAll="true" primaryKey="id_trabalho">
+        <Table name="trabalho">
+        </Table>
+        <Level name="comptotal" visible="true" table="trabalho" column="comptotal" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="COMPFREQ" visible="true" hasAll="true" primaryKey="id_trabalho">
+        <Table name="trabalho">
+        </Table>
+        <Level name="compfreq" visible="true" table="trabalho" column="compfreq" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" visible="true" foreignKey="id_stackoverflow" highCardinality="false" name="DIM_STACK_OVERFLOW">
+      <Hierarchy name="VISITFREQ" visible="true" hasAll="true" primaryKey="id_stackoverflow">
+        <Table name="stack_overflow">
+        </Table>
+        <Level name="visitfreq" visible="true" table="stack_overflow" column="visitfreq" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="ACCOUNT" visible="true" hasAll="true" primaryKey="id_stackoverflow">
+        <Table name="stack_overflow">
+        </Table>
+        <Level name="account" visible="true" table="stack_overflow" column="account" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="PARTFREQ" visible="true" hasAll="true" primaryKey="id_stackoverflow">
+        <Table name="stack_overflow">
+        </Table>
+        <Level name="partfreq" visible="true" table="stack_overflow" column="partfreq" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="COMM" visible="true" hasAll="true" primaryKey="id_stackoverflow">
+        <Table name="stack_overflow">
+        </Table>
+        <Level name="comm" visible="true" table="stack_overflow" column="comm" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="OTHERCOMMS" visible="true" hasAll="true" primaryKey="id_stackoverflow">
+        <Table name="stack_overflow">
+        </Table>
+        <Level name="othercomms" visible="true" table="stack_overflow" column="othercomms" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="COWORKER" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="coworker" visible="true" table="stuck" column="coworker" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="GAME" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightAlias="" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="game" visible="true" table="stuck" column="game" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="GOOGLE" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightAlias="" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="google" visible="true" table="stuck" column="google" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="MEDITATE" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightAlias="" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="meditate" visible="true" table="stuck" column="meditate" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="PANIC" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightAlias="" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="panic" visible="true" table="stuck" column="panic" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="STACK_OVERFLOW" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightAlias="" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="stack_overflow" visible="true" table="stuck" column="stack_overflow" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="VIDEO" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightAlias="" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="video" visible="true" table="stuck" column="video" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="WALK" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightAlias="" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="walk" visible="true" table="stuck" column="walk" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+      <Hierarchy name="WORK" visible="true" hasAll="true" primaryKey="id_stackoverflow" primaryKeyTable="stack_overflow">
+        <Join leftKey="id_stuck" rightAlias="" rightKey="id_stuck">
+          <Table name="stack_overflow" schema="" alias="">
+          </Table>
+          <Table name="stuck" schema="" alias="">
+          </Table>
+        </Join>
+        <Level name="work" visible="true" table="stuck" column="work" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="BoolCount" column="measure" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

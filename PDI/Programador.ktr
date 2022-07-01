@@ -440,10 +440,10 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>StackOverflow</database>
+    <database>stackoverflow</database>
     <port>5432</port>
     <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7a486ad39ff228ec4ff8b</password>
+    <password>Encrypted 2be98afc86aa7f2e4e554e33d8ec0fb8c</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -589,6 +589,45 @@
     </hop>
   </order>
   <step>
+    <name>; to space</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>LanguageHaveWorkedWith</in_stream_name>
+        <out_stream_name>LanguageHaveWorkedWith</out_stream_name>
+        <use_regex>yes</use_regex>
+        <replace_string>;</replace_string>
+        <replace_by_string>  </replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Add sequence</name>
     <type>Sequence</type>
     <description/>
@@ -620,6 +659,451 @@
     <GUI>
       <xloc>208</xloc>
       <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add sequence 2</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <valuename>Id_Programador</valuename>
+    <use_database>N</use_database>
+    <connection>My_DB</connection>
+    <schema/>
+    <seqname>SEQ_</seqname>
+    <use_counter>Y</use_counter>
+    <counter_name/>
+    <start_at>1</start_at>
+    <increment_by>1</increment_by>
+    <max_value>999999999</max_value>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>944</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Beggining</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>beg</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif> </nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>end</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif> </nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Check indexes</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+
+var JS = indexOf(LanguageHaveWorkedWith," JavaScript ") !== -1;
+var HTML = indexOf(LanguageHaveWorkedWith," HTML/CSS ") !== -1;
+var Python = indexOf(LanguageHaveWorkedWith," Python ") !== -1;
+var SQL = indexOf(LanguageHaveWorkedWith," SQL ") !== -1;
+var Java = indexOf(LanguageHaveWorkedWith," Java ") !== -1;
+var NodeJS = indexOf(LanguageHaveWorkedWith," Node.js ") !== -1;
+var TypeScript = indexOf(LanguageHaveWorkedWith," TypeScript ") !== -1;
+var CS = indexOf(LanguageHaveWorkedWith," C# ") !== -1;
+var Bash = indexOf(LanguageHaveWorkedWith, " Bash/Shell ") !== -1;
+var CPP = indexOf(LanguageHaveWorkedWith, " C++ ") !== -1;
+var PHP = indexOf(LanguageHaveWorkedWith, " PHP ") !== -1;
+var C = indexOf(LanguageHaveWorkedWith, " C ") !== -1;
+
+var lang_key = 0;
+lang_key += JS ? 0x00 : 0x01;
+lang_key += HTML ? 0x00 : 0x02;
+lang_key += Python ? 0x00 : 0x04;
+lang_key += SQL ? 0x00 : 0x08;
+lang_key += Java ? 0x00 : 0x10;
+lang_key += NodeJS ? 0x00 : 0X20;
+lang_key += TypeScript ? 0X00 : 0X40;
+lang_key += CS ? 0X00 : 0X80;
+lang_key += Bash ? 0X00 : 0X100;
+lang_key += CPP ? 0X00 : 0X200;
+lang_key += PHP ? 0X00 : 0X400;
+lang_key += C ? 0X00 : 0X800;
+</jsScript_script>
+      </jsScript>
+      <jsScript>
+        <jsScript_type>-1</jsScript_type>
+        <jsScript_name>indexOf_Sample</jsScript_name>
+        <jsScript_script>// Perform the indexOf function
+// 
+// Usage:
+// indexOf(string, substring);
+// indexOf(string, substring, fromIndex);
+//
+// 2007-09-25
+//
+var str1= "Hello Pentaho!";
+var str2= indexOf(str1, "Pentaho");
+var str3= indexOf(str1, "o", 7);
+Alert("Input : " + str1);
+Alert("Index of 'Pentaho' : " + str2);
+Alert("index of 'o', search from position 7 : " + str3);
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>JS</name>
+        <rename>JS</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>HTML</name>
+        <rename>HTML</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>Python</name>
+        <rename>Python</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>SQL</name>
+        <rename>SQL</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>Java</name>
+        <rename>Java</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>NodeJS</name>
+        <rename>NodeJS</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>TypeScript</name>
+        <rename>TypeScript</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>CS</name>
+        <rename>CS</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>Bash</name>
+        <rename>Bash</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>CPP</name>
+        <rename>CPP</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>PHP</name>
+        <rename>PHP</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>C</name>
+        <rename>C</rename>
+        <type>Boolean</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+      <field>
+        <name>lang_key</name>
+        <rename>lang_key</rename>
+        <type>Integer</type>
+        <length>16</length>
+        <precision>2</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1216</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Concat fields</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator> </separator>
+    <enclosure> </enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>beg</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>LanguageHaveWorkedWith_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>aaa</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Concat fields 2</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator> </separator>
+    <enclosure> </enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name/>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>aaa</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>beg</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>LanguageHaveWorkedWith_2</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -821,6 +1305,123 @@ var C = getBit(valuename,11);</jsScript_script>
     </GUI>
   </step>
   <step>
+    <name>Multiple learn</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>LearnCode</in_stream_name>
+        <out_stream_name>LearnCode</out_stream_name>
+        <use_regex>yes</use_regex>
+        <replace_string>(.*\w+.*;.*\w+.*)+</replace_string>
+        <replace_by_string>Multiple ways</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Others learn</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>LearnCode_1</in_stream_name>
+        <out_stream_name>LearnCode_2</out_stream_name>
+        <use_regex>yes</use_regex>
+        <replace_string>Other \(please specify\):</replace_string>
+        <replace_by_string>NA</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Others opsys</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>OpSys</in_stream_name>
+        <out_stream_name>OpSys_1</out_stream_name>
+        <use_regex>yes</use_regex>
+        <replace_string>Other \(please specify\):</replace_string>
+        <replace_by_string>NA</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>208</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Remove var inuteis</name>
     <type>SelectValues</type>
     <description/>
@@ -852,8 +1453,8 @@ var C = getBit(valuename,11);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
+    <name>Remove var inuteis 2</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -862,75 +1463,67 @@ var C = getBit(valuename,11);</jsScript_script>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>My_DB</connection>
-    <schema>public</schema>
-    <table>languages</table>
-    <commit>4096</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
     <fields>
       <field>
-        <column_name>c</column_name>
-        <stream_name>C</stream_name>
+        <name>Age1stCode</name>
       </field>
       <field>
-        <column_name>php</column_name>
-        <stream_name>PHP</stream_name>
+        <name>LearnCode</name>
       </field>
       <field>
-        <column_name>cpp</column_name>
-        <stream_name>CPP</stream_name>
+        <name>YearsCode</name>
       </field>
       <field>
-        <column_name>bash</column_name>
-        <stream_name>Bash</stream_name>
+        <name>YearsCodePro</name>
       </field>
       <field>
-        <column_name>cs</column_name>
-        <stream_name>CS</stream_name>
+        <name>DevType</name>
       </field>
       <field>
-        <column_name>type_scipt</column_name>
-        <stream_name>TypeScript</stream_name>
+        <name>OpSys</name>
       </field>
       <field>
-        <column_name>node_js</column_name>
-        <stream_name>NodeJS</stream_name>
+        <name>lang_key</name>
       </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1216</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replace in string</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
       <field>
-        <column_name>java</column_name>
-        <stream_name>Java</stream_name>
-      </field>
-      <field>
-        <column_name>_sql</column_name>
-        <stream_name>SQL</stream_name>
-      </field>
-      <field>
-        <column_name>python</column_name>
-        <stream_name>Python</stream_name>
-      </field>
-      <field>
-        <column_name>html_css</column_name>
-        <stream_name>HTML</stream_name>
-      </field>
-      <field>
-        <column_name>js</column_name>
-        <stream_name>JS</stream_name>
-      </field>
-      <field>
-        <column_name>id_languages</column_name>
-        <stream_name>valuename</stream_name>
+        <in_stream_name>DevType</in_stream_name>
+        <out_stream_name>DevType</out_stream_name>
+        <use_regex>yes</use_regex>
+        <replace_string>(;)*Other \(please specify\):(;)*</replace_string>
+        <replace_by_string> </replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
       </field>
     </fields>
     <attributes/>
@@ -942,8 +1535,8 @@ var C = getBit(valuename,11);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>400</yloc>
+      <xloc>1120</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -961,31 +1554,24 @@ var C = getBit(valuename,11);</jsScript_script>
     <fields>
       <field>
         <name>Age1stCode</name>
-        <rename/>
       </field>
       <field>
         <name>LearnCode</name>
-        <rename/>
       </field>
       <field>
         <name>YearsCode</name>
-        <rename/>
       </field>
       <field>
         <name>YearsCodePro</name>
-        <rename/>
       </field>
       <field>
         <name>DevType</name>
-        <rename/>
       </field>
       <field>
         <name>LanguageHaveWorkedWith</name>
-        <rename/>
       </field>
       <field>
         <name>OpSys</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1573,8 +2159,8 @@ var C = getBit(valuename,11);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>seleciona opsys</name>
-    <type>SelectValues</type>
+    <name>Table output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1583,152 +2169,75 @@ var C = getBit(valuename,11);</jsScript_script>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <connection>My_DB</connection>
+    <schema>public</schema>
+    <table>languages</table>
+    <commit>4096</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
       <field>
-        <name>Age1stCode</name>
-        <rename/>
+        <column_name>c</column_name>
+        <stream_name>C</stream_name>
       </field>
       <field>
-        <name>LearnCode</name>
-        <rename/>
+        <column_name>php</column_name>
+        <stream_name>PHP</stream_name>
       </field>
       <field>
-        <name>YearsCode</name>
-        <rename/>
+        <column_name>cpp</column_name>
+        <stream_name>CPP</stream_name>
       </field>
       <field>
-        <name>YearsCodePro</name>
-        <rename/>
+        <column_name>bash</column_name>
+        <stream_name>Bash</stream_name>
       </field>
       <field>
-        <name>DevType</name>
-        <rename/>
+        <column_name>cs</column_name>
+        <stream_name>CS</stream_name>
       </field>
       <field>
-        <name>LanguageHaveWorkedWith</name>
-        <rename/>
+        <column_name>type_scipt</column_name>
+        <stream_name>TypeScript</stream_name>
       </field>
       <field>
-        <name>OpSys_1</name>
-        <rename>OpSys</rename>
+        <column_name>node_js</column_name>
+        <stream_name>NodeJS</stream_name>
       </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>304</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Others opsys</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
       <field>
-        <in_stream_name>OpSys</in_stream_name>
-        <out_stream_name>OpSys_1</out_stream_name>
-        <use_regex>yes</use_regex>
-        <replace_string>Other \(please specify\):</replace_string>
-        <replace_by_string>NA</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
+        <column_name>java</column_name>
+        <stream_name>Java</stream_name>
       </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>208</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Multiple learn</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
       <field>
-        <in_stream_name>LearnCode</in_stream_name>
-        <out_stream_name>LearnCode</out_stream_name>
-        <use_regex>yes</use_regex>
-        <replace_string>(.*\w+.*;.*\w+.*)+</replace_string>
-        <replace_by_string>Multiple ways</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
+        <column_name>_sql</column_name>
+        <stream_name>SQL</stream_name>
       </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Others learn</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
       <field>
-        <in_stream_name>LearnCode_1</in_stream_name>
-        <out_stream_name>LearnCode_2</out_stream_name>
-        <use_regex>yes</use_regex>
-        <replace_string>Other \(please specify\):</replace_string>
-        <replace_by_string>NA</replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
+        <column_name>python</column_name>
+        <stream_name>Python</stream_name>
+      </field>
+      <field>
+        <column_name>html_css</column_name>
+        <stream_name>HTML</stream_name>
+      </field>
+      <field>
+        <column_name>js</column_name>
+        <stream_name>JS</stream_name>
+      </field>
+      <field>
+        <column_name>id_languages</column_name>
+        <stream_name>valuename</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1741,624 +2250,7 @@ var C = getBit(valuename,11);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Check indexes</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//Script here
-
-var JS = indexOf(LanguageHaveWorkedWith," JavaScript ") !== -1;
-var HTML = indexOf(LanguageHaveWorkedWith," HTML/CSS ") !== -1;
-var Python = indexOf(LanguageHaveWorkedWith," Python ") !== -1;
-var SQL = indexOf(LanguageHaveWorkedWith," SQL ") !== -1;
-var Java = indexOf(LanguageHaveWorkedWith," Java ") !== -1;
-var NodeJS = indexOf(LanguageHaveWorkedWith," Node.js ") !== -1;
-var TypeScript = indexOf(LanguageHaveWorkedWith," TypeScript ") !== -1;
-var CS = indexOf(LanguageHaveWorkedWith," C# ") !== -1;
-var Bash = indexOf(LanguageHaveWorkedWith, " Bash/Shell ") !== -1;
-var CPP = indexOf(LanguageHaveWorkedWith, " C++ ") !== -1;
-var PHP = indexOf(LanguageHaveWorkedWith, " PHP ") !== -1;
-var C = indexOf(LanguageHaveWorkedWith, " C ") !== -1;
-
-var lang_key = 0;
-lang_key += JS ? 0x00 : 0x01;
-lang_key += HTML ? 0x00 : 0x02;
-lang_key += Python ? 0x00 : 0x04;
-lang_key += SQL ? 0x00 : 0x08;
-lang_key += Java ? 0x00 : 0x10;
-lang_key += NodeJS ? 0x00 : 0X20;
-lang_key += TypeScript ? 0X00 : 0X40;
-lang_key += CS ? 0X00 : 0X80;
-lang_key += Bash ? 0X00 : 0X100;
-lang_key += CPP ? 0X00 : 0X200;
-lang_key += PHP ? 0X00 : 0X400;
-lang_key += C ? 0X00 : 0X800;
-</jsScript_script>
-      </jsScript>
-      <jsScript>
-        <jsScript_type>-1</jsScript_type>
-        <jsScript_name>indexOf_Sample</jsScript_name>
-        <jsScript_script>// Perform the indexOf function
-// 
-// Usage:
-// indexOf(string, substring);
-// indexOf(string, substring, fromIndex);
-//
-// 2007-09-25
-//
-var str1= "Hello Pentaho!";
-var str2= indexOf(str1, "Pentaho");
-var str3= indexOf(str1, "o", 7);
-Alert("Input : " + str1);
-Alert("Index of 'Pentaho' : " + str2);
-Alert("index of 'o', search from position 7 : " + str3);
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>JS</name>
-        <rename>JS</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>HTML</name>
-        <rename>HTML</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>Python</name>
-        <rename>Python</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>SQL</name>
-        <rename>SQL</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>Java</name>
-        <rename>Java</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>NodeJS</name>
-        <rename>NodeJS</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>TypeScript</name>
-        <rename>TypeScript</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>CS</name>
-        <rename>CS</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>Bash</name>
-        <rename>Bash</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>CPP</name>
-        <rename>CPP</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>PHP</name>
-        <rename>PHP</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>C</name>
-        <rename>C</rename>
-        <type>Boolean</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>lang_key</name>
-        <rename>lang_key</rename>
-        <type>Integer</type>
-        <length>16</length>
-        <precision>2</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1216</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>; to space</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>LanguageHaveWorkedWith</in_stream_name>
-        <out_stream_name>LanguageHaveWorkedWith</out_stream_name>
-        <use_regex>yes</use_regex>
-        <replace_string>;</replace_string>
-        <replace_by_string>  </replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>seleciona learn 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Age1stCode</name>
-        <rename/>
-      </field>
-      <field>
-        <name>LearnCode</name>
-        <rename/>
-      </field>
-      <field>
-        <name>YearsCode</name>
-        <rename/>
-      </field>
-      <field>
-        <name>YearsCodePro</name>
-        <rename/>
-      </field>
-      <field>
-        <name>DevType</name>
-        <rename/>
-      </field>
-      <field>
-        <name>LanguageHaveWorkedWith_2</name>
-        <rename>LanguageHaveWorkedWith</rename>
-      </field>
-      <field>
-        <name>OpSys</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1120</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Beggining</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>beg</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif> </nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>end</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif> </nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Concat fields</name>
-    <type>ConcatFields</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator> </separator>
-    <enclosure> </enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name/>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>beg</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>LanguageHaveWorkedWith_1</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-      <targetFieldName>aaa</targetFieldName>
-      <targetFieldLength>0</targetFieldLength>
-      <removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>912</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Concat fields 2</name>
-    <type>ConcatFields</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator> </separator>
-    <enclosure> </enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name/>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>aaa</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>beg</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <ConcatFields>
-      <targetFieldName>LanguageHaveWorkedWith_2</targetFieldName>
-      <targetFieldLength>0</targetFieldLength>
-      <removeSelectedFields>N</removeSelectedFields>
-    </ConcatFields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1008</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>seleciona learn 2 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Age1stCode</name>
-        <rename/>
-      </field>
-      <field>
-        <name>LearnCode_2</name>
-        <rename>LearnCode</rename>
-      </field>
-      <field>
-        <name>YearsCode</name>
-        <rename/>
-      </field>
-      <field>
-        <name>YearsCodePro</name>
-        <rename/>
-      </field>
-      <field>
-        <name>DevType</name>
-        <rename/>
-      </field>
-      <field>
-        <name>LanguageHaveWorkedWith</name>
-        <rename/>
-      </field>
-      <field>
-        <name>OpSys</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Remove var inuteis 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Age1stCode</name>
-        <rename/>
-      </field>
-      <field>
-        <name>LearnCode</name>
-        <rename/>
-      </field>
-      <field>
-        <name>YearsCode</name>
-        <rename/>
-      </field>
-      <field>
-        <name>YearsCodePro</name>
-        <rename/>
-      </field>
-      <field>
-        <name>DevType</name>
-        <rename/>
-      </field>
-      <field>
-        <name>OpSys</name>
-        <rename/>
-      </field>
-      <field>
-        <name>lang_key</name>
-        <rename/>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1216</xloc>
-      <yloc>208</yloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2439,43 +2331,8 @@ Alert("index of 'o', search from position 7 : " + str3);
     </GUI>
   </step>
   <step>
-    <name>Add sequence 2</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>Id_Programador</valuename>
-    <use_database>N</use_database>
-    <connection>My_DB</connection>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>944</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Replace in string</name>
-    <type>ReplaceString</type>
+    <name>seleciona learn 2</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2486,17 +2343,28 @@ Alert("index of 'o', search from position 7 : " + str3);
     </partitioning>
     <fields>
       <field>
-        <in_stream_name>DevType</in_stream_name>
-        <out_stream_name>DevType</out_stream_name>
-        <use_regex>yes</use_regex>
-        <replace_string>(;)*Other \(please specify\):(;)*</replace_string>
-        <replace_by_string> </replace_by_string>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
+        <name>Age1stCode</name>
       </field>
+      <field>
+        <name>LearnCode</name>
+      </field>
+      <field>
+        <name>YearsCode</name>
+      </field>
+      <field>
+        <name>YearsCodePro</name>
+      </field>
+      <field>
+        <name>DevType</name>
+      </field>
+      <field>
+        <name>LanguageHaveWorkedWith_2</name>
+        <rename>LanguageHaveWorkedWith</rename>
+      </field>
+      <field>
+        <name>OpSys</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -2508,7 +2376,107 @@ Alert("index of 'o', search from position 7 : " + str3);
     </remotesteps>
     <GUI>
       <xloc>1120</xloc>
-      <yloc>208</yloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>seleciona learn 2 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Age1stCode</name>
+      </field>
+      <field>
+        <name>LearnCode_2</name>
+        <rename>LearnCode</rename>
+      </field>
+      <field>
+        <name>YearsCode</name>
+      </field>
+      <field>
+        <name>YearsCodePro</name>
+      </field>
+      <field>
+        <name>DevType</name>
+      </field>
+      <field>
+        <name>LanguageHaveWorkedWith</name>
+      </field>
+      <field>
+        <name>OpSys</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>seleciona opsys</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Age1stCode</name>
+      </field>
+      <field>
+        <name>LearnCode</name>
+      </field>
+      <field>
+        <name>YearsCode</name>
+      </field>
+      <field>
+        <name>YearsCodePro</name>
+      </field>
+      <field>
+        <name>DevType</name>
+      </field>
+      <field>
+        <name>LanguageHaveWorkedWith</name>
+      </field>
+      <field>
+        <name>OpSys_1</name>
+        <rename>OpSys</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>304</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
