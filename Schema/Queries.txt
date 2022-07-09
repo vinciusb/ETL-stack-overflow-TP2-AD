@@ -1,0 +1,140 @@
+WITH
+    MEMBER [Measures].[Total] AS
+    [DIM_PROGRAMADOR.SQL].[true] +
+    [DIM_PROGRAMADOR.BASH].[true] +
+    [DIM_PROGRAMADOR.C].[true] +
+    [DIM_PROGRAMADOR.CPP].[true] +
+    [DIM_PROGRAMADOR.CS].[true] +
+    [DIM_PROGRAMADOR.HTML_CSS].[true] +
+    [DIM_PROGRAMADOR.JAVA].[true] +
+    [DIM_PROGRAMADOR.JS].[true] +
+    [DIM_PROGRAMADOR.NODE_JS].[true] +
+    [DIM_PROGRAMADOR.PHP].[true] +
+    [DIM_PROGRAMADOR.PYTHON].[true] +
+    [DIM_PROGRAMADOR.TYPE_SCRIPT].[true]
+
+    MEMBER [Measures].[sql] AS
+    [DIM_PROGRAMADOR.SQL].[true] / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[bash] AS
+    [DIM_PROGRAMADOR.BASH].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[c] AS
+    [DIM_PROGRAMADOR.C].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[cpp] AS
+    [DIM_PROGRAMADOR.CPP].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[cs] AS
+    [DIM_PROGRAMADOR.CS].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[html_css] AS
+    [DIM_PROGRAMADOR.HTML_CSS].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[java] AS
+    [DIM_PROGRAMADOR.JAVA].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[js] AS
+    [DIM_PROGRAMADOR.JS].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[node_js] AS
+    [DIM_PROGRAMADOR.NODE_JS].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[php] AS
+    [DIM_PROGRAMADOR.PHP].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[python] AS
+    [DIM_PROGRAMADOR.PYTHON].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[type_script] AS
+    [DIM_PROGRAMADOR.TYPE_SCRIPT].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+SELECT
+    {
+    [Measures].[sql],
+    [Measures].[bash],
+    [Measures].[c],
+    [Measures].[cpp],
+    [Measures].[cs],
+    [Measures].[html_css],
+    [Measures].[java],
+    [Measures].[js],
+    [Measures].[node_js],
+    [Measures].[php],
+    [Measures].[python],
+    [Measures].[type_script]
+    } ON COLUMNS,
+    TopCount([DIM_PESSOA.COUNTRY].[country].Members, 7, [Measures].[BoolCount]) ON ROWS
+FROM [MultiHierarchy]
+
+
+
+
+=================================================================================================================================================================================
+
+
+WITH
+    MEMBER [Measures].[sql] AS
+    [DIM_PROGRAMADOR.SQL].[true]
+
+    MEMBER [Measures].[bash] AS
+    [DIM_PROGRAMADOR.BASH].[true]
+
+    MEMBER [Measures].[c] AS
+    [DIM_PROGRAMADOR.C].[true]
+
+    MEMBER [Measures].[cpp] AS
+    [DIM_PROGRAMADOR.CPP].[true]
+
+    MEMBER [Measures].[cs] AS
+    [DIM_PROGRAMADOR.CS].[true]
+
+    MEMBER [Measures].[html_css] AS
+    [DIM_PROGRAMADOR.HTML_CSS].[true]
+
+    MEMBER [Measures].[java] AS
+    [DIM_PROGRAMADOR.JAVA].[true]
+
+    MEMBER [Measures].[js] AS
+    [DIM_PROGRAMADOR.JS].[true]
+
+    MEMBER [Measures].[node_js] AS
+    [DIM_PROGRAMADOR.NODE_JS].[true]
+
+    MEMBER [Measures].[php] AS
+    [DIM_PROGRAMADOR.PHP].[true]
+
+    MEMBER [Measures].[python] AS
+    [DIM_PROGRAMADOR.PYTHON].[true]
+
+    MEMBER [Measures].[type_script] AS
+    [DIM_PROGRAMADOR.TYPE_SCRIPT].[true]
+
+
+SELECT
+    CrossJoin({
+    [Measures].[sql],
+    [Measures].[bash],
+    [Measures].[c],
+    [Measures].[cpp],
+    [Measures].[cs],
+    [Measures].[html_css],
+    [Measures].[java],
+    [Measures].[js],
+    [Measures].[node_js],
+    [Measures].[php],
+    [Measures].[python],
+    [Measures].[type_script]
+    }, [DIM_TRABALHO.COMPFREQ].[compfreq].members) ON COLUMNS,
+    [DIM_PESSOA.COUNTRY].[Brazil] ON ROWS
+FROM [MultiHierarchy]
+
+
+
+
+
+
+
+
+
+
