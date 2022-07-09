@@ -72,6 +72,87 @@ FROM [MultiHierarchy]
 
 =================================================================================================================================================================================
 
+WITH
+    MEMBER [Measures].[Total] AS
+    [DIM_PROGRAMADOR.SQL].[true] +
+    [DIM_PROGRAMADOR.BASH].[true] +
+    [DIM_PROGRAMADOR.C].[true] +
+    [DIM_PROGRAMADOR.CPP].[true] +
+    [DIM_PROGRAMADOR.CS].[true] +
+    [DIM_PROGRAMADOR.HTML_CSS].[true] +
+    [DIM_PROGRAMADOR.JAVA].[true] +
+    [DIM_PROGRAMADOR.JS].[true] +
+    [DIM_PROGRAMADOR.NODE_JS].[true] +
+    [DIM_PROGRAMADOR.PHP].[true] +
+    [DIM_PROGRAMADOR.PYTHON].[true] +
+    [DIM_PROGRAMADOR.TYPE_SCRIPT].[true]
+
+    MEMBER [Measures].[sql] AS
+    [DIM_PROGRAMADOR.SQL].[true] / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[bash] AS
+    [DIM_PROGRAMADOR.BASH].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[c] AS
+    [DIM_PROGRAMADOR.C].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[cpp] AS
+    [DIM_PROGRAMADOR.CPP].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[cs] AS
+    [DIM_PROGRAMADOR.CS].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[html_css] AS
+    [DIM_PROGRAMADOR.HTML_CSS].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[java] AS
+    [DIM_PROGRAMADOR.JAVA].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[js] AS
+    [DIM_PROGRAMADOR.JS].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[node_js] AS
+    [DIM_PROGRAMADOR.NODE_JS].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[php] AS
+    [DIM_PROGRAMADOR.PHP].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[python] AS
+    [DIM_PROGRAMADOR.PYTHON].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[type_script] AS
+    [DIM_PROGRAMADOR.TYPE_SCRIPT].[true]  / [Measures].[Total], FORMAT_STRING = "##.##%"
+
+SELECT
+    {
+    [Measures].[sql],
+    [Measures].[bash],
+    [Measures].[c],
+    [Measures].[cpp],
+    [Measures].[cs],
+    [Measures].[html_css],
+    [Measures].[java],
+    [Measures].[js],
+    [Measures].[node_js],=================================================================================================================================================================================
+    [Measures].[php],
+    [Measures].[python],
+    [Measures].[type_script]
+    } ON COLUMNS,
+    {
+    [DIM_TRABALHO.ORGSIZE].[Just me - I am a freelancer, sole proprietor, etc.],
+    [DIM_TRABALHO.ORGSIZE].[2 to 9 employees],
+    [DIM_TRABALHO.ORGSIZE].[10 to 19 employees],
+    [DIM_TRABALHO.ORGSIZE].[20 to 99 employees],
+    [DIM_TRABALHO.ORGSIZE].[100 to 499 employees],
+    [DIM_TRABALHO.ORGSIZE].[500 to 999 employees],
+    [DIM_TRABALHO.ORGSIZE].[1,000 to 4,999 employees],
+    [DIM_TRABALHO.ORGSIZE].[5,000 to 9,999 employees],
+    [DIM_TRABALHO.ORGSIZE].[10,000 or more employees]
+    } ON ROWS
+FROM [MultiHierarchy]
+
+=================================================================================================================================================================================
+
 
 WITH
     MEMBER [Measures].[sql] AS
@@ -129,6 +210,36 @@ SELECT
     [DIM_PESSOA.COUNTRY].[Brazil] ON ROWS
 FROM [MultiHierarchy]
 
+
+=================================================================================================================================================================================
+
+WITH
+    MEMBER [Measures].[Total] AS
+    SUM(
+        {[DIM_PESSOA.COUNTRY].[All DIM_PESSOA.COUNTRYs]},
+        [Measures].[BoolCount]
+    ), FORMAT_STRING = "##.##%"
+
+    MEMBER [Measures].[Percent] AS
+    [Measures].[BoolCount] * 100 / [Measures].[Total]
+
+    MEMBER [DIM_PESSOA.COUNTRY].[All DIM_PESSOA.COUNTRYs].[Outros] AS
+    SUM(
+        {[DIM_PESSOA.COUNTRY].[All DIM_PESSOA.COUNTRYs]},
+        [Measures].[BoolCount]
+    ) - SUM(
+        {TopCount([DIM_PESSOA.COUNTRY].[country].Members, 10, [Measures].[BoolCount])},
+        [Measures].[BoolCount]
+    )
+
+SELECT
+NON EMPTY {[Measures].[Percent]} ON COLUMNS,
+NON EMPTY {
+Order(TopCount([DIM_PESSOA.COUNTRY].[country].Members, 10, [Measures].[BoolCount]), [Measures].[BoolCount], BDESC),
+[DIM_PESSOA.COUNTRY].[Outros]
+}
+ON ROWS
+FROM [MultiHierarchy]
 
 
 
